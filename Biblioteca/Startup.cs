@@ -1,4 +1,6 @@
 ﻿using Biblioteca.Data.Context;
+using Biblioteca.Data.Interfaces;
+using Biblioteca.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,9 @@ namespace Biblioteca
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DbContextBiblioteca>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaConnection")));
+
+            services.AddSingleton(Configuration);
+            services.AddScoped<IAcervo, AcervoService>();
 
             services.AddMvc();
         }
