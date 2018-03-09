@@ -1,20 +1,22 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca.Data.Models
 {
-    public class Checkout
+    public class Checkout : Base
     {
-        [Key]
-        public Guid Id { get; set; }
+        public Checkout() { }
 
-        [Required]
-        public Acervo BibliotecaPatrimonio { get; set; }
+        public Checkout(Acervo bibliotecaPatrimonio, Cartao cartao, DateTime dtEmprestimo, DateTime dtDevolucao)
+        {
+            BibliotecaPatrimonio = bibliotecaPatrimonio;
+            Cartao = cartao;
+            DtEmprestimo = dtEmprestimo;
+            DtDevolucao = dtDevolucao;
+        }
 
-        public Cartao Cartao { get; set; }
-
-        public DateTime DtEmprestimo { get; set; }
-
-        public DateTime DtDevolucao { get; set; }
+        public Acervo BibliotecaPatrimonio { get; private set; }
+        public Cartao Cartao { get; private set; }
+        public DateTime DtEmprestimo { get; private set; }
+        public DateTime DtDevolucao { get; private set; }
     }
 }

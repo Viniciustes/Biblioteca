@@ -21,12 +21,12 @@ namespace Biblioteca
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+
             services.AddDbContext<DbContextBiblioteca>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaConnection")));
 
             services.AddSingleton(Configuration);
             services.AddScoped<IAcervo, AcervoService>();
-
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

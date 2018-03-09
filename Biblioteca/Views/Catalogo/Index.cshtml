@@ -1,3 +1,36 @@
 ﻿@model Biblioteca.Models.Biblioteca.AcervoIndexViewModel
 
-<h1>@ViewBag.Titulo</h1>
+<div id="assets">
+    <h3>Library Catalog</h3>
+    <div id="assetsTable">
+        <table class="table table-condensed" id="catalogIndexTable">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Titulo</th>
+                    <th>Autor / Diretor</th>
+                    <th>Código de Barras</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var acervo in @Model.Acervos)
+                {
+                <tr class="assetRow">
+                    <td class="">
+                        <div>
+                            <a asp-controller="Catalogo" asp-action="Detalhe" asp-route-id="@acervo.Id">
+                                <img src="@acervo.ImagemUrl" class="imagemCell" />
+                            </a>
+                        </div>
+                    </td>
+                    <td class="">@acervo.Titulo</td>
+                    <td class="">@acervo.AutorOuDiretor</td>
+                    <td class="">@acervo.CodigoDeBarras</td>
+                    <td class="">@acervo.Tipo</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

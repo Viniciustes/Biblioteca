@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Biblioteca.Data.Models
+﻿namespace Biblioteca.Data.Models
 {
-    public class Status
+    public class Status : Base
     {
-        [Key]
-        public int Id { get; set; }
+        public Status() { }
 
-        [Required]
-        public string Nome { get; set; }
+        public Status(string nome, string descricao)
+        {
+            Nome = nome;
+            Descricao = descricao;
+        }
 
-        [Required]
-        public string Descricao { get; set; }
+        public string Nome { get; private set; }
+        public string Descricao { get; private set; }
     }
 }

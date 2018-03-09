@@ -13,8 +13,8 @@ using System;
 namespace Biblioteca.Data.Migrations
 {
     [DbContext(typeof(DbContextBiblioteca))]
-    [Migration("20180308193019_02 Update Models")]
-    partial class _02UpdateModels
+    [Migration("20180309140437_01")]
+    partial class _01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,16 +35,15 @@ namespace Biblioteca.Data.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<int?>("FilialId");
+                    b.Property<Guid?>("FilialId");
 
                     b.Property<string>("ImagemUrl");
 
                     b.Property<int>("Quantidade");
 
-                    b.Property<int>("StatusId");
+                    b.Property<Guid?>("StatusId");
 
-                    b.Property<string>("Titulo")
-                        .IsRequired();
+                    b.Property<string>("Titulo");
 
                     b.HasKey("Id");
 
@@ -59,7 +58,7 @@ namespace Biblioteca.Data.Migrations
 
             modelBuilder.Entity("Biblioteca.Data.Models.Cartao", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DtGeracao");
@@ -76,9 +75,9 @@ namespace Biblioteca.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("BibliotecaPatrimonioId");
+                    b.Property<Guid?>("BibliotecaPatrimonioId");
 
-                    b.Property<int?>("CartaoId");
+                    b.Property<Guid?>("CartaoId");
 
                     b.Property<DateTime>("DtDevolucao");
 
@@ -98,9 +97,9 @@ namespace Biblioteca.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AcervoId");
+                    b.Property<Guid?>("AcervoId");
 
-                    b.Property<int?>("CartaoId");
+                    b.Property<Guid?>("CartaoId");
 
                     b.Property<DateTime?>("DtDevolucao");
 
@@ -122,11 +121,11 @@ namespace Biblioteca.Data.Migrations
 
                     b.Property<string>("CPF");
 
-                    b.Property<int?>("CartaoId");
+                    b.Property<Guid?>("CartaoId");
 
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<int?>("FilialResponsavelId");
+                    b.Property<Guid?>("FilialResponsavelId");
 
                     b.Property<string>("Nome");
 
@@ -147,27 +146,24 @@ namespace Biblioteca.Data.Migrations
 
             modelBuilder.Entity("Biblioteca.Data.Models.Filial", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Descricao");
 
                     b.Property<DateTime>("DtAbertura");
 
-                    b.Property<Guid>("EnderecoIdEndereco");
+                    b.Property<Guid?>("EnderecoId");
 
                     b.Property<string>("ImagemUrl");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(30);
+                    b.Property<string>("Nome");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired();
+                    b.Property<string>("Telefone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnderecoIdEndereco");
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Filial");
                 });
@@ -179,7 +175,7 @@ namespace Biblioteca.Data.Migrations
 
                     b.Property<int>("DiaDaSemana");
 
-                    b.Property<int?>("FilialId");
+                    b.Property<Guid?>("FilialId");
 
                     b.Property<int>("HoraDeAbertura");
 
@@ -199,7 +195,7 @@ namespace Biblioteca.Data.Migrations
 
                     b.Property<Guid?>("AcervoId");
 
-                    b.Property<int?>("CartaoBibliotecaId");
+                    b.Property<Guid?>("CartaoBibliotecaId");
 
                     b.Property<DateTime>("DtReserva");
 
@@ -214,14 +210,12 @@ namespace Biblioteca.Data.Migrations
 
             modelBuilder.Entity("Biblioteca.Data.Models.Status", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Descricao")
-                        .IsRequired();
+                    b.Property<string>("Descricao");
 
-                    b.Property<string>("Nome")
-                        .IsRequired();
+                    b.Property<string>("Nome");
 
                     b.HasKey("Id");
 
@@ -230,7 +224,7 @@ namespace Biblioteca.Data.Migrations
 
             modelBuilder.Entity("Biblioteca.Data.Models.VOs.Endereco", b =>
                 {
-                    b.Property<Guid>("IdEndereco")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CEP");
@@ -249,7 +243,7 @@ namespace Biblioteca.Data.Migrations
 
                     b.Property<int>("Tipo");
 
-                    b.HasKey("IdEndereco");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
@@ -260,14 +254,11 @@ namespace Biblioteca.Data.Migrations
                 {
                     b.HasBaseType("Biblioteca.Data.Models.Acervo");
 
-                    b.Property<string>("Autor")
-                        .IsRequired();
+                    b.Property<string>("Autor");
 
-                    b.Property<string>("CodigoBarras")
-                        .IsRequired();
+                    b.Property<string>("CodigoBarras");
 
-                    b.Property<string>("ISBN")
-                        .IsRequired();
+                    b.Property<string>("ISBN");
 
                     b.ToTable("Livro");
 
@@ -293,16 +284,14 @@ namespace Biblioteca.Data.Migrations
 
                     b.HasOne("Biblioteca.Data.Models.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StatusId");
                 });
 
             modelBuilder.Entity("Biblioteca.Data.Models.Checkout", b =>
                 {
                     b.HasOne("Biblioteca.Data.Models.Acervo", "BibliotecaPatrimonio")
                         .WithMany()
-                        .HasForeignKey("BibliotecaPatrimonioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BibliotecaPatrimonioId");
 
                     b.HasOne("Biblioteca.Data.Models.Cartao", "Cartao")
                         .WithMany("Checkouts")
@@ -313,8 +302,7 @@ namespace Biblioteca.Data.Migrations
                 {
                     b.HasOne("Biblioteca.Data.Models.Acervo", "Acervo")
                         .WithMany()
-                        .HasForeignKey("AcervoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AcervoId");
 
                     b.HasOne("Biblioteca.Data.Models.Cartao", "Cartao")
                         .WithMany()
@@ -336,8 +324,7 @@ namespace Biblioteca.Data.Migrations
                 {
                     b.HasOne("Biblioteca.Data.Models.VOs.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoIdEndereco")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("EnderecoId");
                 });
 
             modelBuilder.Entity("Biblioteca.Data.Models.HorarioFuncionamento", b =>

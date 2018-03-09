@@ -1,0 +1,65 @@
+﻿@model Biblioteca.Models.Biblioteca.AcervoDetalheViewModel
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">View Library Item</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <img class="detailImage" src="@Model.ImagemUrl" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p id="itemTitle">@Model.Titulo</p>
+                <p id="itemAuthor">@Model.AutorOuDiretor</p>
+                <p id="itemStatus">@Model.Status</p>
+                <p id="itemType">@Model.Tipo</p>
+                <p id="itemLocation">Last Location: @Model.Filial</p>
+                @if (Model.Status == "Checked Out")
+                {
+                    <p id="itemPatron">Checked Out By: @Model.NomeCliente</p>
+                }
+                @if (@Model.Status != "Lost")
+                {
+                    @if (@Model.Status == "Available")
+                    {
+                        <p><a class="btn btn-lg btn-info" role="button" asp-controller="Catalogo" asp-action="Checkout" asp-route-id="@Model.Id">Check Out</a></p>
+                    }
+
+                    @if (@Model.Status == "Checked Out")
+                    {
+                        <p><a class="btn btn-lg btn-success" role="button" asp-controller="Catalogo" asp-action="CheckIn" asp-route-id="@Model.Id">Check In</a></p>
+                        <p><a class="btn btn-lg btn-warning" role="button" asp-controller="Catalogo" asp-action="Hold" asp-route-id="@Model.Id">Place Hold</a></p>
+                    }
+
+                    @*<p><a class="btn btn-lg btn-danger" role="button" asp-controller="Catalogo" asp-action="MarkLost" asp-route-id="@Model.Id">Mark Item Lost</a></p>*@
+                }
+
+                else
+                {
+                    <p>This item has been lost. It cannot be checked out.</p>
+                    <p><a class="btn btn-lg btn-success" role="button" asp-controller="Catalogo" asp-action="MarkFound" asp-route-id="@Model.Id">Mark Item Found</a></p>
+                }
+            </div>
+            <div class="col-md-4 detailInfo">
+                <table>
+                    <tr>
+                        <td class="itemLabel">ISBN: </td>
+                        <td class="itemValue">@Model.ISBN</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Call Number: </td>
+                        <td class="itemValue">@Model.CodigoBarras</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Replacement Cost: </td>
+                        <td class="itemValue">$@Model.Custo</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -64,6 +64,6 @@ namespace Biblioteca.Services.Services
 
         public string BuscarPorTitulo(Guid id) => _db.Acervo.FirstOrDefault(a => a.Id == id).Titulo;
 
-        public Filial BuscarLocalizacaoFilial(int id) => _db.Acervo.FirstOrDefault(a => a.Filial.Id == id).Filial;
+        public Filial BuscarLocalizacaoFilial(Guid id) => _db.Acervo.FirstOrDefault(a => a.Filial.Id == id).Filial;
     }
 }

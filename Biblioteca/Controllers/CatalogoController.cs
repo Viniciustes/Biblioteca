@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Biblioteca.Data.Context;
 using Biblioteca.Data.Interfaces;
 using Biblioteca.Models.Biblioteca;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,19 @@ namespace Biblioteca.Controllers
         {
             _acervo = acervo;
         }
+
+        private void Inicializar()
+        {
+           // _acervo.Adicionar(DbInicializacao.InicializarAcervoLivro());
+            _acervo.Adicionar(DbInicializacao.InicializarAcervoVideo());
+        }
+
         public IActionResult Index()
         {
-            var asservoModels = _acervo.BuscarTodos();
+           // Inicializar();
 
-            var listarResultado = asservoModels
+
+            var listaAcervo = _acervo.BuscarTodos()
                 .Select(resultado => new AcervoIndexListarViewModel
                 {
                     Id = resultado.Id,
@@ -30,10 +40,51 @@ namespace Biblioteca.Controllers
 
             var acervoIndexViewModel = new AcervoIndexViewModel()
             {
-                Acervos = listarResultado
+                Acervos = listaAcervo
             };
 
             return View(acervoIndexViewModel);
+        }
+
+        public IActionResult CheckOut(Guid id)
+        {
+            return View();
+        }
+
+        public IActionResult MarkFound(Guid id)
+        {
+            return View();
+        }
+
+        public IActionResult CheckIn(Guid id)
+        {
+            return View();
+        }
+
+        public IActionResult Hold(Guid id)
+        {
+            return View();
+        }
+
+        public IActionResult Detalhe(Guid id)
+        {
+            var acervo = _acervo.BuscarPorId(id);
+
+            var acervoDetalheViewModel = new AcervoDetalheViewModel
+            {
+                Id = id,
+                Titulo = acervo.Titulo,
+                Ano = acervo.Ano,
+                Custo = acervo.Custo,
+                Status = acervo.Status.Nome,
+                ImagemUrl = acervo.ImagemUrl,
+                AutorOuDiretor = _acervo.BuscarPorAutorOuDiretor(id),
+               // Filial = _acervo.BuscarLocalizacaoFilial(id).Nome,
+                CodigoBarras = _acervo.BuscarPorCodigoBarras(id),
+                ISBN = _acervo.BuscarPorISBN(id)
+            };
+
+            return View(acervoDetalheViewModel);
         }
     }
 }

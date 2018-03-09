@@ -1,21 +1,23 @@
 ﻿using Biblioteca.Data.Models.Enums;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca.Data.Models
 {
-    public class HorarioFuncionamento
+    public class HorarioFuncionamento : Base
     {
-        [Key]
-        public Guid Id { get; set; }
-        public Filial Filial { get; set; }
+        public HorarioFuncionamento() { }
 
-        public EnumDiaDaSemana DiaDaSemana { get; set; }
+        public HorarioFuncionamento(Filial filial, EnumDiaDaSemana diaDaSemana, int horaDeAbertura, int horaDeFechamento)
+        {
+            Filial = filial;
+            DiaDaSemana = diaDaSemana;
+            HoraDeAbertura = horaDeAbertura;
+            HoraDeFechamento = horaDeFechamento;
+        }
 
-        [Range(0,23)]
-        public int HoraDeAbertura { get; set; }
-
-        [Range(0, 23)]
-        public int HoraDeFechamento { get; set; }
+        public Filial Filial { get; private set; }
+        public EnumDiaDaSemana DiaDaSemana { get; private set; }
+        public int HoraDeAbertura { get; private set; }
+        public int HoraDeFechamento { get; private set; }
     }
 }

@@ -2,11 +2,19 @@
 
 namespace Biblioteca.Data.Models
 {
-    public class Reserva
+    public class Reserva : Base
     {
-        public Guid Id { get; set; }
-        public virtual Acervo Acervo { get; set; }
-        public virtual Cartao CartaoBiblioteca { get; set; }
-        public DateTime DtReserva { get; set; }
+        public Reserva() { }
+
+        public Reserva(DateTime dtReserva, Acervo acervo, Cartao cartaoBiblioteca)
+        {
+            DtReserva = dtReserva;
+            Acervo = acervo;
+            CartaoBiblioteca = cartaoBiblioteca;
+        }
+
+        public DateTime DtReserva { get; private set; }
+        public virtual Acervo Acervo { get; private set; }
+        public virtual Cartao CartaoBiblioteca { get; private set; }
     }
 }

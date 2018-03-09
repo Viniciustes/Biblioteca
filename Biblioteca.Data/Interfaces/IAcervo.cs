@@ -16,6 +16,6 @@ namespace Biblioteca.Data.Interfaces
         string BuscarPorTitulo(Guid id);
         string BuscarPorISBN(Guid id);
 
-        Filial BuscarLocalizacaoFilial(int id);
+        Filial BuscarLocalizacaoFilial(Guid id);
     }
 }

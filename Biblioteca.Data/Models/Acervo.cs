@@ -1,29 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace Biblioteca.Data.Models
+﻿namespace Biblioteca.Data.Models
 {
-    public class Acervo
+    public abstract class Acervo : Base
     {
-        [Key]
-        public Guid Id { get; set; }
-
-        [Required]
-        public string Titulo { get; set; }
-
-        [Required]
-        public int Ano { get; set; }
-
-        [Required]
-        public Status Status { get; set; }
-
-        [Required]
-        public decimal Custo { get; set; }
-
-        public string ImagemUrl { get; set; }
-
-        public int Quantidade { get; set; }
-
-        public virtual Filial Filial { get; set; }
+        public string Titulo { get; protected set; }
+        public int Ano { get; protected set; }
+        public Status Status { get; protected set; }
+        public decimal Custo { get; protected set; }
+        public string ImagemUrl { get; protected set; }
+        public int Quantidade { get; protected set; }
+        public virtual Filial Filial { get; protected set; }
     }
 }

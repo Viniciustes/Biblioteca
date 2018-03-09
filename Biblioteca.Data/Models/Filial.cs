@@ -1,32 +1,31 @@
 ﻿using Biblioteca.Data.Models.VOs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca.Data.Models
 {
-    public class Filial
+    public class Filial : Base
     {
-        [Key]
-        public int Id { get; set; }
+        public Filial() { }
 
-        [Required]
-        [StringLength(30, ErrorMessage ="Utilizar no máximo 30 caracteres")]
-        public string Nome { get; set; }
+        public Filial(string nome, Endereco endereco, string telefone, string descricao, DateTime dtAbertura, string imagemUrl)
+        {
+            Nome = nome;
+            Endereco = endereco;
+            Telefone = telefone;
+            Descricao = descricao;
+            DtAbertura = dtAbertura;
+            ImagemUrl = imagemUrl;
+        }
 
-        [Required]
-        public Endereco Endereco { get; set; }
-
-        [Required]
-        public string Telefone { get; set; }
-
-        public string Descricao { get; set; }
-
-        public DateTime DtAbertura { get; set; }
+        public string Nome { get; private set; }
+        public Endereco Endereco { get; private set; }
+        public string Telefone { get; private set; }
+        public string Descricao { get; private set; }
+        public DateTime DtAbertura { get; private set; }
+        public string ImagemUrl { get; private set; }
 
         public virtual IEnumerable<Cliente> Clientes { get; set; }
         public virtual IEnumerable<Acervo> Patrimonios { get; set; }
-
-        public string ImagemUrl { get; set; }
     }
 }
