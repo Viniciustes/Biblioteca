@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div>
-                    <img class="detailImage" src="@Model.ImagemUrl" />
+                    <img class="detailImage" src="~/images/banner1.svg" />
                 </div>
             </div>
             <div class="col-md-4">
@@ -34,7 +34,7 @@
                         <p><a class="btn btn-lg btn-warning" role="button" asp-controller="Catalogo" asp-action="Hold" asp-route-id="@Model.Id">Place Hold</a></p>
                     }
 
-                    @*<p><a class="btn btn-lg btn-danger" role="button" asp-controller="Catalogo" asp-action="MarkLost" asp-route-id="@Model.Id">Mark Item Lost</a></p>*@
+                    <p><a class="btn btn-lg btn-danger" role="button" asp-controller="Catalogo" asp-action="MarkLost" asp-route-id="@Model.Id">Mark Item Lost</a></p>
                 }
 
                 else

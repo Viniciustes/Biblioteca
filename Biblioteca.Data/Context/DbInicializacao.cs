@@ -33,5 +33,14 @@ namespace Biblioteca.Data.Context
 
             return video;
         }
+
+        public static Filial InicializarFilial()
+        {
+            var endereco = new Endereco("Logadouro Endereço", "Numero Endereço", "Complemento Endereço", "Estado Endereço", "Cidade Endereço", "CEP Endereço", EnumTipoEndereco.Padrao);
+
+            var filial = new Filial("Nome Filial", endereco, "Telefone Filial", "Descrição Filial", DateTime.Now, "ImagemUrl Filial");
+
+            return filial;
+        }
     }
 }

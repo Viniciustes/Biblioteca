@@ -18,13 +18,14 @@ namespace Biblioteca.Controllers
 
         private void Inicializar()
         {
-           // _acervo.Adicionar(DbInicializacao.InicializarAcervoLivro());
+            // _acervo.Adicionar(DbInicializacao.InicializarFilial());
+            _acervo.Adicionar(DbInicializacao.InicializarAcervoLivro());
             _acervo.Adicionar(DbInicializacao.InicializarAcervoVideo());
         }
 
         public IActionResult Index()
         {
-           // Inicializar();
+            //   Inicializar();
 
 
             var listaAcervo = _acervo.BuscarTodos()
@@ -49,6 +50,11 @@ namespace Biblioteca.Controllers
         public IActionResult CheckOut(Guid id)
         {
             return View();
+        }
+
+        public IActionResult MarkLost(Guid id)
+        {
+            return RedirectToAction("Index");
         }
 
         public IActionResult MarkFound(Guid id)
@@ -79,7 +85,7 @@ namespace Biblioteca.Controllers
                 Status = acervo.Status.Nome,
                 ImagemUrl = acervo.ImagemUrl,
                 AutorOuDiretor = _acervo.BuscarPorAutorOuDiretor(id),
-               // Filial = _acervo.BuscarLocalizacaoFilial(id).Nome,
+                Filial = _acervo.BuscarLocalizacaoFilial(id).Nome,
                 CodigoBarras = _acervo.BuscarPorCodigoBarras(id),
                 ISBN = _acervo.BuscarPorISBN(id)
             };
