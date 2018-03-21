@@ -18,7 +18,7 @@ namespace Biblioteca.Models.Biblioteca
         public string Filial { get; set; }
         public string ImagemUrl { get; set; }
         public string NomeCliente { get; set; }
-        public Checkout UltimoCheckout { get; set; }
+       // public Checkout UltimoCheckout { get; set; }
         public IEnumerable<CheckoutHistorico> CheckoutHistoricos { get; set; }
         public IEnumerable<AcervoReservaViewModel> ReservaAtual { get; set; }
     }

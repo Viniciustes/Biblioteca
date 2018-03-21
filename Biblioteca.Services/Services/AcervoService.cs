@@ -8,10 +8,8 @@ using System.Linq;
 
 namespace Biblioteca.Services.Services
 {
-    public class AcervoService : IAcervo
+    public class AcervoService : BaseService, IAcervo
     {
-        private readonly DbContextBiblioteca _db;
-
         public AcervoService(DbContextBiblioteca dbContextBiblioteca)
         {
             _db = dbContextBiblioteca;

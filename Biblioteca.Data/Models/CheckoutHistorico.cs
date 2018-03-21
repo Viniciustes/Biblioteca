@@ -16,7 +16,7 @@ namespace Biblioteca.Data.Models
 
         public Acervo Acervo { get; private set; }
         public Cartao Cartao { get; private set; }
-        public DateTime DtEmprestimo { get; private set; }
+        public DateTime DtEmprestimo { get; set; }
         public DateTime? DtDevolucao { get; private set; }
     }
 }

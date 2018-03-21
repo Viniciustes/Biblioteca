@@ -23,10 +23,13 @@ namespace Biblioteca
         {
             services.AddMvc();
 
-            services.AddDbContext<DbContextBiblioteca>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaConnection")));
-
             services.AddSingleton(Configuration);
             services.AddScoped<IAcervo, AcervoService>();
+            services.AddScoped<IStatus, StatusService>();
+            services.AddScoped<ICliente, ClienteService>();
+            services.AddScoped<ICheckout, CheckoutService>();
+
+            services.AddDbContext<DbContextBiblioteca>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
